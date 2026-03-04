@@ -24,7 +24,7 @@ from typing_extensions import TypedDict
 
 from langchain_core.tools import tool
 from langchain_core.messages import AnyMessage, HumanMessage
-
+from langchain_openai import ChatOpenAI
 from langgraph.graph import StateGraph, START, END, add_messages
 from langgraph.prebuilt import ToolNode, tools_condition
 
@@ -608,9 +608,9 @@ def build_graph(sc_state: SupplyChainState):
     Returns: (compiled_graph, all_tools)
     """
     all_tools = build_tools(sc_state)
-    from langchain_groq import ChatGroq
+    from langchain_openai import ChatOpenAI
     # LLM with timeout + retry (from latest project code)
-    llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0.2,timeout=45, max_retries=3)
+    llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.2,timeout=45, max_retries=3)
     llm_with_tools = llm.bind_tools(all_tools)
 
     def tool_calling_llm(state: State):
