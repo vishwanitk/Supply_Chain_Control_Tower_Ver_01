@@ -24,7 +24,7 @@ from typing_extensions import TypedDict
 
 from langchain_core.tools import tool
 from langchain_core.messages import AnyMessage, HumanMessage
-from langchain_openai import ChatOpenAI
+
 from langgraph.graph import StateGraph, START, END, add_messages
 from langgraph.prebuilt import ToolNode, tools_condition
 
